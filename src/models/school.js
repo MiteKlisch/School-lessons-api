@@ -12,18 +12,30 @@ const schoolSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    class: {
+        type: String,
+        trim: true
+    },
     groupOfPupils: {
         type: Number,
+        default: 0,
         validate(value) {
             if (value < 0) {
                 throw new Error('Must be a positive number!')
             }
         }
     },
-    statDate: { type: Date },
+    startDate: { type: Date },
     endDate: { type: Date }
-
 });
+
+schoolSchema.pre('save', async function (next) {
+    const lesson = this;
+    
+    console.log('just before saving')
+
+    next();
+})
 
 
 const School = mongoose.model('School', schoolSchema);
