@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const validator = require('validator');
 
 const schoolSchema = new mongoose.Schema({
     theme: {
@@ -8,9 +7,9 @@ const schoolSchema = new mongoose.Schema({
         trim: true
     },
     teacher: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        trim: true
+        ref: 'Teacher'
     },
     class: {
         type: String,
@@ -28,15 +27,6 @@ const schoolSchema = new mongoose.Schema({
     startDate: { type: Date },
     endDate: { type: Date }
 });
-
-schoolSchema.pre('save', async function (next) {
-    const lesson = this;
-    
-    console.log('just before saving')
-
-    next();
-})
-
 
 const School = mongoose.model('School', schoolSchema);
 
