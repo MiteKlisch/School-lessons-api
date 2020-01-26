@@ -50,31 +50,31 @@ router.post('/teacher/logoutAll', auth, async (req, res) => {
 
 router.patch('/teacher/me', auth, async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['email', 'password', 'name'];
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
-
+    const allowedUpdates = ['name', 'email', 'password'];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     if (!isValidOperation) {
-        res.status(400).send({error: 'Invalid updates!'});
+        res.status(400).send({error: 'Invalid updates!'})
     }
 
     try {
-       const teacher = await Teacher.findById(req.params.id);
+        //const user = await User.findByIdAndUpdate(req.params.id);
 
-       updates.forEach( (update) => teacher[update] = req.body[update]);
-       await teacher.save();
-
+        updates.forEach((update) => req.teacher[update] = req.body[update]);
+        await req.teacher.save();
+        res.send(req.teacher);
+        
         if (!teacher) {
-            return res.status(404).send()
+            res.status(404).send()
         }
 
         res.send(teacher);
     } catch (error) {
         res.status(400).send(error);
     }
-})
+});
 
 router.get('/teacher/me', auth, async (req, res) => {
-    res.send(req.user);
+    res.send(req.teacher);
 });
 
 router.get('/teacher/:id', auth, async (req, res) => {
@@ -93,8 +93,8 @@ router.get('/teacher/:id', auth, async (req, res) => {
 
 router.delete('/teacher/me', auth, async (req, res) => {
     try {
-        await req.user.remove();
-        res.send(req.user);
+        await req.teacher.remove();
+        res.send(req.teacher);
     } catch (e) {
         res.status(500).send(e);
     }
