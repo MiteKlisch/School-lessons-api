@@ -1,5 +1,5 @@
 const express = require('express');
-const schoolRouter = require('./routers/school');
+const lessonRouter = require('./routers/lesson');
 const teacherRouter = require('./routers/teacher');
 require('./db/mongoose');
 
@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(schoolRouter);
+app.use(lessonRouter);
 app.use(teacherRouter);
 
 app.listen(port, () => {
