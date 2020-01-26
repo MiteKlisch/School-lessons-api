@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
-const School = require('../models/school');
+const Lesson = require('./lesson');
 
 const teacherSchema =  new mongoose.Schema({
 
@@ -47,8 +47,8 @@ const teacherSchema =  new mongoose.Schema({
 }
 );
 
-teacherSchema.virtual('school', {
-    ref: 'School',
+teacherSchema.virtual('lesson', {
+    ref: 'Lesson',
     localField: '_id',
     foreignField: 'teacher'
 });
@@ -101,9 +101,9 @@ teacherSchema.pre('save', async function (next) {
 });
 
 //Delete user tasks when user is removed
-teacherSchema.pre('remove', async function () {
+teacherSchema.pre('remove', async function (next) {
     const teacher = this;
-    await School.deleteMany({ teacher: teacher._id });
+    await Lesson.deleteMany({ teacher: teacher._id });
 
     next();
 })
