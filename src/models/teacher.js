@@ -100,7 +100,7 @@ teacherSchema.pre('save', async function (next) {
     next();
 });
 
-//Delete user tasks when user is removed
+//Delete lessons when user is removed
 teacherSchema.pre('remove', async function (next) {
     const teacher = this;
     await Lesson.deleteMany({ teacher: teacher._id });
