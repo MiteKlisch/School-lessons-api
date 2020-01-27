@@ -1,7 +1,7 @@
 const express = require('express');
 const lessonRouter = require('./routers/lesson');
 const teacherRouter = require('./routers/teacher');
-const pupilRouter = require('./routers/pupils');
+const pupilRouter = require('./routers/pupil');
 const groupRouter = require('./routers/group');
 require('./db/mongoose');
 
