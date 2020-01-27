@@ -7,7 +7,9 @@ const router = new express.Router();
 router.post('/group', auth, async (req, res) => {
     const group = new Group({
         ...req.body,
-        teacher: req.teacher._id
+        students: {
+            student: req.pupil._id 
+            }
         });
 
     try {
@@ -20,7 +22,7 @@ router.post('/group', auth, async (req, res) => {
 
 router.patch('/group/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['theme', 'teacher', 'groupOfPupils', 'statDate', 'endDate'];
+    const allowedUpdates = ['nameGroup', 'students'];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
     if (!isValidOperation) {
