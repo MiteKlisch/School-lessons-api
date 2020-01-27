@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const Group = require('./group');
+const Group = require('./group');
 const pupilSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -19,7 +19,7 @@ const pupilSchema = new mongoose.Schema({
 pupilSchema.virtual('group', {
     ref: 'Group',
     localField: '_id',
-    foreignField: 'pupil'
+    foreignField: 'students'
 });
 
 //Delete groups when user is removed

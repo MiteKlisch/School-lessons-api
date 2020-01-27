@@ -4,12 +4,10 @@ const Group = require('../models/group');
 
 const router = new express.Router();
 
-router.post('/group', auth, async (req, res) => {
+router.post('/group', async (req, res) => {
     const group = new Group({
         ...req.body,
-        students: {
-            student: req.pupil._id 
-            }
+        students: req.pupil._id  
         });
 
     try {
@@ -20,7 +18,7 @@ router.post('/group', auth, async (req, res) => {
     }
 });
 
-router.patch('/group/:id', auth, async (req, res) => {
+router.patch('/group/:id', async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['nameGroup', 'students'];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
@@ -30,7 +28,7 @@ router.patch('/group/:id', auth, async (req, res) => {
     }
 
     try {
-       const group = await Group.findOne({ _id: req.params.id, pupil: req.pupil._id });
+       const group = await Group.findOne({ _id: req.params.id, students: req.pupil._id });
 
         if (!group) {
             return res.status(404).send()
@@ -45,9 +43,9 @@ router.patch('/group/:id', auth, async (req, res) => {
     }
 })
 
-router.get('/group', auth, async (req, res) => {
+router.get('/group', async (req, res) => {
     try {
-        const group = await Group.find({ pupil: req.pupil._id })
+        const group = await Group.find({ students: req.pupil._id })
         //await req.teacher.populate('lesson').execPopulate();
         res.send(group);
     } catch (error) {
@@ -55,11 +53,11 @@ router.get('/group', auth, async (req, res) => {
     }
 });
 
-router.get('/group/:id', auth, async (req, res) => {
+router.get('/group/:id', async (req, res) => {
     const _id = req.params.id;
     try {
         //const lesson = await Lesson.findById(_id);
-        const group = await Group.findOne({ _id, pupil: req.pupil._id });
+        const group = await Group.findOne({ _id, students: req.pupil._id });
         if (!group) {
             return res.status(404).send();
         }
@@ -70,10 +68,10 @@ router.get('/group/:id', auth, async (req, res) => {
     }
 });
 
-router.delete('/group/:id', auth, async (req, res) => {
+router.delete('/group/:id', async (req, res) => {
     const _id = req.params.id;
     try {
-        const group = await Pupil.findOneAndDelete({_id: _id, pupil: req.pupil._id});
+        const group = await Pupil.findOneAndDelete({_id: _id, students: req.pupil._id});
 
         if (!group) {
             return res.status(400).send();

@@ -5,14 +5,13 @@ const groupSchema = new mongoose.Schema({
     nameGroup: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
-    students: [{
-        student: {
+    students:[{
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'Pupil'
-        }
     }],
 });
 
