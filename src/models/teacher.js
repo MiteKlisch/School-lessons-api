@@ -65,7 +65,7 @@ teacherSchema.methods.toJSON = function () {
 
 teacherSchema.methods.generateAuthToken = async function () {
     const teacher = this;
-    const token = jwt.sign({ _id: teacher._id.toString()}, 'secretword');
+    const token = jwt.sign({ _id: teacher._id.toString()}, process.env.JWT_SECRET);
 
     teacher.tokens = teacher.tokens.concat({ token });
     await teacher.save();
