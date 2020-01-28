@@ -16,8 +16,8 @@ const lessonSchema = new mongoose.Schema({
     // required: true,
     ref: 'Group',
   }],
-  startDate: { type: Date },
-  endDate: { type: Date },
+  startLesson: { type: Date },
+  endLesson: { type: Date },
 });
 
 const Lesson = mongoose.model('Lesson', lessonSchema);

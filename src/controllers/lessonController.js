@@ -21,7 +21,7 @@ exports.lesson_post = async (req, res) => {
 // eslint-disable-next-line consistent-return
 exports.lesson_patch = async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ['theme', 'teacher', 'groupOfPupils', 'statDate', 'endDate'];
+  const allowedUpdates = ['theme', 'teacher', 'class', 'statLesson', 'endLesson'];
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 
   if (!isValidOperation) {
