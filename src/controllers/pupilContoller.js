@@ -9,7 +9,7 @@ exports.pupil_post = async (req, res) => {
         res.status(201).send(pupil);
     } catch (error) {
         res.status(400).send(error)
-    }
+    }   
 };
 
 exports.pupil_patch = async (req, res) => {
@@ -17,7 +17,7 @@ exports.pupil_patch = async (req, res) => {
     const allowedUpdates = ['name', 'age'];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     if (!isValidOperation) {
-        res.status(400).send({error: 'Invalid updates!'})
+        res.status(400).send({error: 'Invalid updates!'});
     }
 
     try {
@@ -27,10 +27,6 @@ exports.pupil_patch = async (req, res) => {
         if (!pupil) {
             res.status(404).send()
         }
-
-        //updates.forEach((update) => req.pupil[update] = req.body[update]);
-        //await req.pupil.save();
-        //res.send(req.pupil);
         
         res.send(pupil);
     } catch (error) {
@@ -44,7 +40,7 @@ exports.pupils_get = async (req, res) => {
         const pupil = await Pupil.find({});
         res.send(pupil);
     } catch (error) {
-        res.status(500).send(error)
+        res.status(500).send(error);
     }
 };
 

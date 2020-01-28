@@ -1,10 +1,13 @@
 const Group = require('../models/group');
+const Pupil = require('../models/pupil');
+
 
 exports.group_post = async (req, res) => {
-    const group = new Group({
+    const pupil = await Pupil.find({});
+    const group = new Group({ 
         ...req.body,
-        students: req.pupil._id  
-        });
+        students: pupil
+    });
 
     try {
         await group.save();
@@ -24,7 +27,7 @@ exports.group_patch = async (req, res) => {
     }
 
     try {
-       const group = await Group.findOne({ _id: req.params.id, students: req.pupil._id });
+       const group = await Group.findOne({ _id: req.params.id });
 
         if (!group) {
             return res.status(404).send()
@@ -41,7 +44,7 @@ exports.group_patch = async (req, res) => {
 
 exports.groups_get = async (req, res) => {
     try {
-        const group = await Group.find({ students: req.pupil._id })
+        const group = await Group.find({})
         //await req.teacher.populate('lesson').execPopulate();
         res.send(group);
     } catch (error) {
@@ -50,10 +53,9 @@ exports.groups_get = async (req, res) => {
 };
 
 exports.group_getID = async (req, res) => {
-    const _id = req.params.id;
     try {
         //const lesson = await Lesson.findById(_id);
-        const group = await Group.findOne({ _id, students: req.pupil._id });
+        const group = await Group.findOne({ _id: req.params.id });
         if (!group) {
             return res.status(404).send();
         }
@@ -65,9 +67,8 @@ exports.group_getID = async (req, res) => {
 };
 
 exports.group_delete = async (req, res) => {
-    const _id = req.params.id;
     try {
-        const group = await Pupil.findOneAndDelete({_id: _id, students: req.pupil._id});
+        const group = await Group.findOneAndDelete({ _id: req.params.id });
 
         if (!group) {
             return res.status(400).send();
