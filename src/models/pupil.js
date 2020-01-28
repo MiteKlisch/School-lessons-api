@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const pupilSchema = new mongoose.Schema({
   name: {
     type: String,

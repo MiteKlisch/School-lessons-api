@@ -1,5 +1,5 @@
 const express = require('express');
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
 // const Lesson = require('../models/lesson');
 const lessonController = require('../controllers/lessonController');
 
