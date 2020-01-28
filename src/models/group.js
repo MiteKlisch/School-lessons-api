@@ -15,6 +15,12 @@ const groupSchema = new mongoose.Schema({
   }],
 });
 
+groupSchema.virtual('lesson', {
+  ref: 'Lesson',
+  localField: '_id',
+  foreignField: 'groupOfPupils',
+});
+
 const Group = mongoose.model('Group', groupSchema);
 
 module.exports = Group;

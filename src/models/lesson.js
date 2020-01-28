@@ -11,19 +11,11 @@ const lessonSchema = new mongoose.Schema({
     required: true,
     ref: 'Teacher',
   },
-  class: {
-    type: String,
-    trim: true,
-  },
-  groupOfPupils: {
-    type: Number,
-    default: 0,
-    validate(value) {
-      if (value < 0) {
-        throw new Error('Must be a positive number!');
-      }
-    },
-  },
+  class: [{
+    type: mongoose.Schema.Types.ObjectId,
+    // required: true,
+    ref: 'Group',
+  }],
   startDate: { type: Date },
   endDate: { type: Date },
 });
