@@ -75,11 +75,8 @@ teacherSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
-// Defining Teacher model
-const Teacher = mongoose.model('Teacher', teacherSchema);
-
-
 teacherSchema.statics.findByCredentials = async (email, password) => {
+  // eslint-disable-next-line no-use-before-define
   const teacher = await Teacher.findOne({ email });
 
   if (!teacher) {
@@ -116,5 +113,9 @@ teacherSchema.pre('remove', async function (next) {
 
   next();
 });
+
+// Defining Teacher model
+const Teacher = mongoose.model('Teacher', teacherSchema);
+
 
 module.exports = Teacher;
