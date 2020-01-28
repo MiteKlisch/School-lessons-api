@@ -5,14 +5,13 @@ const jwt = require('jsonwebtoken');
 
 const Lesson = require('./lesson');
 
-const teacherSchema =  new mongoose.Schema({
-
-    email: {
+const teacherSchema = new mongoose.Schema({
+  email: {
         type: String,
         unique: true,
         required: true,
         trim: true,
-        lowercase: true,
+    lowercase: true,
         validate(value){
             if (!validator.isEmail(value)) {
                 throw new Error('Email is invalid')
@@ -100,7 +99,7 @@ teacherSchema.pre('save', async function (next) {
     next();
 });
 
-//Delete lessons when user is removed
+// Delete lessons when teacher is removed
 teacherSchema.pre('remove', async function (next) {
     const teacher = this;
     await Lesson.deleteMany({ teacher: teacher._id });
