@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
-const Teacher = require('../models/teacher').default;
+const Teacher = require('../models/teacher');
 
 const auth = async (req, res, next) => {
   try {

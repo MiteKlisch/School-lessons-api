@@ -24,9 +24,7 @@ exports.teacher_login = async (req, res) => {
 
 exports.teacher_logout = async (req, res) => {
   try {
-    req.teacher.tokens = req.teacher.tokens.filter((token) => {
-      token.token != req.token;
-    });
+    req.teacher.tokens = req.teacher.tokens.filter((token) => token.token !== req.token);
 
     await req.teacher.save();
     res.status(200).send('You logged out!');

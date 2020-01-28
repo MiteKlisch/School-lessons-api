@@ -1,10 +1,13 @@
 const Lesson = require('../models/lesson');
+const Group = require('../models/group');
 
 exports.lesson_post = async (req, res) => {
+  const group = await Group.find({});
   const lesson = new Lesson({
     ...req.body,
     // eslint-disable-next-line no-underscore-dangle
     teacher: req.teacher._id,
+    class: group,
   });
 
   try {
