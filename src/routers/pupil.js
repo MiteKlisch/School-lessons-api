@@ -1,5 +1,4 @@
 const express = require('express');
-const auth = require('../middleware/auth')
 const pupilController = require('../controllers/pupilContoller');
 
 const router = new express.Router();
@@ -14,4 +13,4 @@ router.get('/pupils/:id', pupilController.pupil_get);
 
 router.delete('/pupils/:id', pupilController.pupil_delete);
 
-module.exports = router
+module.exports = router;
