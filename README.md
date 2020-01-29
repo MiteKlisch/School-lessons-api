@@ -1,3 +1,3 @@
 <h1>Model of School Database</h1>
 
-<p>[Model](https://app.creately.com/diagram/Wb4YQVg4oeX/edit)
+<p>[Model](https://whimsical.com/Uz96jEPEvN659ZnsAaBhUa)
