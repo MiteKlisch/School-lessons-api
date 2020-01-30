@@ -18,7 +18,7 @@ exports.teacher_login = async (req, res) => {
     const token = await teacher.generateAuthToken();
     res.send({ teacher, token });
   } catch (error) {
-    res.status(400).send();
+    res.status(400).send(error.message);
   }
 };
 
